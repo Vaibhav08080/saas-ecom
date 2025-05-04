@@ -3,7 +3,7 @@ import styles from "./page.module.css";
 import { stripe } from "@/lib/stripe";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-
+import { Midbody } from "../components/Midbody";
 
 export default async function Home() {
   const products = await stripe.products.list({
@@ -14,21 +14,25 @@ export default async function Home() {
   return (
     <div>
       <section>
-        <div>
-          <div>
-            <h2>
+        <div className={styles.heroContainer}>
+          <div className={styles.heroText}>
+            <h2 className={styles.heroTitle}>
               Welcome to our ecommerce store
             </h2>
-            <p>
+            <p className={styles.heroDesc}>
               Shop our wide selection of products
             </p>
-            <Button asChild variant="default">
+            <Button asChild variant="default" className={styles.heroBtn}>
               <Link href="/product">Our Products</Link>
             </Button>
-           
           </div>
-          <Image alt="Banner" src={products.data[0].images[0]} width={500} height={500}/>
+          <div className={styles.heroImg}>
+            <Image alt="Banner" src={products.data[0].images[0]} width={220} height={220}/>
+          </div>
         </div>
+      </section>
+      <section>
+        <Midbody/>
       </section>
     </div>
   );
